@@ -1,20 +1,20 @@
 FROM ubuntu:22.04
 
-RUN apt-get update && apt-get install -y sudo wget vim curl gawk make gcc
-RUN sudo apt-get install bzip2
+RUN apt -y update && apt install -y sudo wget vim curl gawk make gcc
+RUN sudo apt install bzip2
 
-RUN wget https://repo.continuum.io/archive/Anaconda3-2019.03-Linux-x86_64.sh && \
-    sh Anaconda3-2019.03-Linux-x86_64.sh -b  && \
-    rm -f Anaconda3-2019.03-Linux-x86_64.sh && \
+RUN wget https://repo.continuum.io/archive/Anaconda3-2022.05-Linux-x86_64.sh && \
+    sh Anaconda3-2022.05-Linux-x86_64.sh -b  && \
+    rm -f Anaconda3-2022.05-Linux-x86_64.sh && \
     sudo curl -sL https://deb.nodesource.com/setup_16.x | sudo bash -  && \
-    sudo apt-get install -y nodejs
+    sudo apt install -y nodejs
 
 ENV PATH $PATH:/root/anaconda3/bin
 
-RUN pip install --upgrade pip
-RUN pip install pandas_datareader
-RUN pip install mplfinance
-RUN pip install japanize-matplotlib
+RUN python -m pip install --upgrade pip
+RUN python -m pip install pandas_datareader
+RUN python -m pip install mplfinance
+RUN python -m pip install japanize-matplotlib
 
 RUN wget --quiet http://prdownloads.sourceforge.net/ta-lib/ta-lib-0.4.0-src.tar.gz -O ta-lib-0.4.0-src.tar.gz && \
     tar xvf ta-lib-0.4.0-src.tar.gz && \
